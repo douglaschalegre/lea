@@ -33,11 +33,10 @@ const mockData = [
   },
 ]
 
-function App() {
+export function Students() {
   return (
     <>
     <div className="mt-4 px-4 sm:px-6 gap-4 md:mt-0 flex items-baseline">
-    {/* <div className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6"> */}
         <h1 className="text-2xl font-semibold">Alunos</h1>
         <p className="align-baseline flex text-gray-700/80">
             Visualize os alunos cadastrados no sistema.</p>
@@ -84,5 +83,3 @@ function App() {
    </>
   )
 }
-
-export default App
