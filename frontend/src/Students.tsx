@@ -2,6 +2,8 @@ import { Button } from "./components/ui/button"
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader, DialogDescription, DialogFooter, DialogClose } from "./components/ui/dialog"
 import { Table, TableCaption, TableHead, TableHeader, TableRow, TableBody, TableCell } from "./components/ui/table"
 import { Input } from "./components/ui/input"
+import { FileText } from "lucide-react"
+import { useState } from "react"
 
 type Student = {
     name: string
@@ -9,6 +11,7 @@ type Student = {
     period: string
     college: string
     birthDate: number
+    curriculum: string
 }
 
 const mockData: Student[] = [
@@ -18,6 +21,7 @@ const mockData: Student[] = [
     period: "Morning",
     college: "Harvard",
     birthDate: 21,
+    curriculum: "https://example.com/curriculum/john-doe"
   },
   {
     name: "Jane Doe",
@@ -25,6 +29,7 @@ const mockData: Student[] = [
     period: "Night",
     college: "Yale",
     birthDate: 23,
+    curriculum: "https://example.com/curriculum/john-doe" 
   },
   {
     name: "Alice Doe",
@@ -32,6 +37,7 @@ const mockData: Student[] = [
     period: "Morning",
     college: "Stanford",
     birthDate: 25,
+    curriculum: "https://example.com/curriculum/john-doe"
   },
   {
     name: "Bob Doe",
@@ -39,14 +45,18 @@ const mockData: Student[] = [
     period: "Night",
     college: "MIT",
     birthDate: 22,
+    curriculum: "https://example.com/curriculum/john-doe"
   },
 ]
 
-function handleAdd({name, course, period, college, birthDate}: {name: string, course: string, period: string, college: string, birthDate: number}) {
-    mockData.push({ name , course, period, college, birthDate })
-}
 
 export function Students() {
+  const [students, setStudents] = useState<Student[]>(mockData)
+  function handleAdd(
+      {name, course, period, college, birthDate, curriculum}: {
+      name: string, course: string, period: string, college: string, birthDate: number, curriculum: string}) {
+      setStudents([...students, { name , course, period, college, birthDate, curriculum }])
+  }
   return (
     <>
     <div className="mt-4 px-4 sm:px-6 gap-4 md:mt-0 flex items-baseline">
@@ -64,7 +74,7 @@ export function Students() {
                         <DialogDescription>Adicione um novo aluno ao sistema.</DialogDescription>
                     </DialogHeader>
                     <form className="mt-2">
-                        <div className="grid grid-cols-6 gap-4 sm:grid-cols-4">
+                        <div className="grid grid-cols-6 gap-4">
                             <div className="col-span-4">
                                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
                                 <Input type="text" name="name" id="name" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
@@ -85,6 +95,10 @@ export function Students() {
                                 <label htmlFor="period" className="block text-sm font-medium text-gray-700">Período</label>
                                 <Input type="number" name="period" id="period" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
                             </div>
+                            <div className="col-span-6">
+                                <label htmlFor="curriculum" className="block text-sm font-medium text-gray-700">Curriculo</label>
+                                <Input type="file" name="curriculum" id="curriculum" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                            </div>
                         </div>
                         <DialogFooter className="">
                             <div className="mt-8 flex gap-2 justify-end">
@@ -101,7 +115,8 @@ export function Students() {
                                       course: e.target.form.course.value,
                                       period: e.target.form.period.value,
                                       college: e.target.form.college.value,
-                                      birthDate: e.target.form.bithdate.value
+                                      birthDate: e.target.form.bithdate.value,
+                                      curriculum: e.target.form.curriculum.value
                                     });
                                   }}
                                 >
@@ -123,16 +138,18 @@ export function Students() {
             <TableHead>Período</TableHead>
             <TableHead>Faculdade</TableHead>
             <TableHead>Idade</TableHead>
+            <TableHead>Currículo</TableHead>
         </TableRow>
     </TableHeader>
     <TableBody>
-        {mockData.map((data) => (
+        {students.map((data) => (
             <TableRow key={data.name}>
                 <TableCell>{data.name}</TableCell>
                 <TableCell>{data.course}</TableCell>
                 <TableCell>{data.period}</TableCell>
                 <TableCell>{data.college}</TableCell>
                 <TableCell>{data.birthDate}</TableCell>
+                <TableCell><a href={data.curriculum} target="_blank"><FileText/></a></TableCell>
             </TableRow>
         ))}
     </TableBody>
