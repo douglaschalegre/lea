@@ -1,12 +1,8 @@
 import {
-  Home,
-  LineChart,
-  Package,
-  Package2,
+  Hexagon,
+  Settings,
   PanelLeft,
   Search,
-  ShoppingCart,
-  Users2,
 } from "lucide-react"
 
 import {
@@ -30,7 +26,15 @@ import {
 import { Input } from "@/components/ui/input"
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { objects } from "./navbar_items"
 
+function AsideItem({ Icon, label, href }: Readonly<{ Icon: React.ElementType, label: string, href: string}>) {
+  return (
+    <a href={href} className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+      <Icon className="h-5 w-5" />
+      {label}
+    </a>
+  )}
 
 export function Header() {
   return (
@@ -48,42 +52,17 @@ export function Header() {
                   href="#"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                 >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
+                  <Hexagon className="h-5 w-5 transition-all group-hover:scale-110" />
+                  <span className="sr-only">Hexagon CRM</span>
                 </a>
+                {objects.map((obj) => (
+                  <AsideItem key={obj.label} Icon={obj.Icon} label={obj.label} href={obj.href} />
+                ))}
                 <a
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  Orders
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Products
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Users2 className="h-5 w-5" />
-                  Customers
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <LineChart className="h-5 w-5" />
+                  <Settings className="h-5 w-5" />
                   Settings
                 </a>
               </nav>

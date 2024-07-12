@@ -1,13 +1,7 @@
 import {
-  LineChart,
-  Home,
   Hexagon,
   Settings,
-  Contact2,
-  Users2,
-  MessageCircleMore
 } from "lucide-react"
-
 
 import {
   Tooltip,
@@ -15,6 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./components/ui/tooltip"
+import { objects } from "./navbar_items"
 
 function AsideItem({ Icon, label, href }: Readonly<{ Icon: React.ElementType, label: string, href: string}>) {
     return (
@@ -35,13 +30,7 @@ function AsideItem({ Icon, label, href }: Readonly<{ Icon: React.ElementType, la
     )
 }
 
-const asideObjects = [
-    { Icon: Home, label: "Dashboard", href: "#"},
-    { Icon: MessageCircleMore, label: "Mensagens", href: "#" },
-    { Icon: Contact2, label: "Prospecção", href: "#" },
-    { Icon: Users2, label: "Alunos", href: "#" },
-    { Icon: LineChart, label: "Métricas", href: "#" },
-]
+
 
 export function Aside() {
   return (
@@ -54,7 +43,7 @@ export function Aside() {
             <Hexagon className="h-4 w-4 transition-all group-hover:scale-110" />
             <span className="sr-only">Hexagon CRM</span>
           </a>
-            {asideObjects.map((obj) => (
+            {objects.map((obj) => (
                 <AsideItem key={obj.label} Icon={obj.Icon} label={obj.label} href={obj.href} />
             ))}
         </nav>
