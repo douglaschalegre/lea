@@ -1,18 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-import { Students } from './Students.tsx'
+import './index.css'
 import { Aside } from './Aside.tsx'
 import { Header } from './Header.tsx'
-
-import './index.css'
+import { Students } from './Students.tsx'
+import { Whatsapp } from './Whatsapp.tsx'
 
 const router = createBrowserRouter([
     {
         path: '/alunos',
         element: <Students />,
     },
+    {
+        path: '/whatsapp',
+        element: <Whatsapp />,
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
