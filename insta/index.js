@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
+import helmet from "helmet";
 
 const PORT = process.env.PORT || 5000
 app.set('port', PORT);
@@ -9,6 +10,7 @@ app.listen(app.get('port'));
 
 app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 app.use(bodyParser.json());
+app.use(helmet())
 
 const token = process.env.TOKEN || 'token';
 var received_updates = [];
