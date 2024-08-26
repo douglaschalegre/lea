@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
-import helmet from "helmet";
+var helmet = require('helmet')
 
 const PORT = process.env.PORT || 5000
 app.set('port', PORT);
@@ -47,19 +47,18 @@ app.post('/facebook', function(req, res) {
 });
 
 app.post('/instagram', function(req, res) {
-  console.log('Instagram request body:');
-  console.log(req.body);
   // Process the Instagram updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
 });
 
 app.post('/threads', function(req, res) {
-  console.log('Threads request body:');
-  console.log(req.body);
   // Process the Threads updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
 });
 
-app.listen(() => console.log(`server running on port ${PORT}...`));
+app.listen(() => console.log(`server running on port ${PORT}...
+  TOKEN: ${token}
+  SECRET: ${process.env.APP_SECRET}
+`));

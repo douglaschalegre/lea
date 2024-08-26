@@ -4,22 +4,23 @@
     "description": "Graph API Webhooks Sample",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js"
+        "start": "node index.js"
     },
     "dependencies": {
-      "body-parser": "~1.15.0",
-      "express": "~4.13.3",
-      "express-x-hub": "^1.0.4"
+        "body-parser": "~1.15.0",
+        "express": "~4.13.3",
+        "express-x-hub": "^1.0.4",
+        "helmet": "^7.1.0"
     },
     "repository": {
-      "type": "git",
-      "url": "https://github.com/fbsamples/graph-api-webhooks-samples"
+        "type": "git",
+        "url": "https://github.com/fbsamples/graph-api-webhooks-samples"
     },
     "keywords": [
-      "node",
-      "express",
-      "graph api"
+        "node",
+        "express",
+        "graph api"
     ],
     "license": "https://github.com/fbsamples/graph-api-webhooks-samples/blob/master/LICENSE",
     "bugs": "https://github.com/fbsamples/graph-api-webhooks-samples/issues"
-  }
+}
