@@ -16,7 +16,6 @@ const token = process.env.TOKEN || 'token';
 var received_updates = [];
 
 app.get('/', function(req, res) {
-  console.log(req);
   res.send('<pre>' + JSON.stringify(received_updates, null, 2) + '</pre>');
 });
 
@@ -40,7 +39,6 @@ app.post('/facebook', function(req, res) {
     return;
   }
 
-  console.log('request header X-Hub-Signature validated');
   // Process the Facebook updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
