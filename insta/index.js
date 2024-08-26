@@ -3,13 +3,14 @@ var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
 
-app.set('port', (process.env.PORT || 5000));
+const PORT = process.env.PORT || 5000
+app.set('port', PORT);
 app.listen(app.get('port'));
 
 app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 app.use(bodyParser.json());
 
-var token = process.env.TOKEN || 'token';
+const token = process.env.TOKEN || 'token';
 var received_updates = [];
 
 app.get('/', function(req, res) {
@@ -59,4 +60,4 @@ app.post('/threads', function(req, res) {
   res.sendStatus(200);
 });
 
-app.listen(() => console.log('server running...'));
+app.listen(() => console.log(`server running on port ${PORT}...`));
