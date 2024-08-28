@@ -2,18 +2,20 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
+var helmet = require('helmet')
 
-app.set('port', (process.env.PORT || 5000));
+const PORT = process.env.PORT || 5000
+app.set('port', PORT);
 app.listen(app.get('port'));
 
 app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 app.use(bodyParser.json());
+app.use(helmet())
 
-var token = process.env.TOKEN || 'token';
+const token = process.env.TOKEN || 'token';
 var received_updates = [];
 
 app.get('/', function(req, res) {
-  console.log(req);
   res.send('<pre>' + JSON.stringify(received_updates, null, 2) + '</pre>');
 });
 
@@ -37,26 +39,24 @@ app.post('/facebook', function(req, res) {
     return;
   }
 
-  console.log('request header X-Hub-Signature validated');
   // Process the Facebook updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
 });
 
 app.post('/instagram', function(req, res) {
-  console.log('Instagram request body:');
-  console.log(req.body);
   // Process the Instagram updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
 });
 
 app.post('/threads', function(req, res) {
-  console.log('Threads request body:');
-  console.log(req.body);
   // Process the Threads updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
 });
 
-app.listen(() => console.log('server running...'));
+app.listen(() => console.log(`server running on port ${PORT}...
+  TOKEN: ${token}
+  SECRET: ${process.env.APP_SECRET}
+`));
