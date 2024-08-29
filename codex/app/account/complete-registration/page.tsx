@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { SubmitButton } from "../../../components/forms/submit-button";
 import { Input } from "@/components/forms/input";
@@ -7,7 +6,7 @@ import { Label } from "@/components/forms/label";
 import { FormMessage, Message } from "@/components/forms/form-message";
 import { encodedRedirect } from "@/utils/utils";
 
-export default function CompleteRegistration({ searchParams }: { searchParams: Message }) {
+export default function CompleteRegistration({ searchParams }: Readonly<{ searchParams: Message }>) {
   const signUp = async (formData: FormData) => {
     "use server";
     const cpf = formData.get("cpf")?.toString();
@@ -29,8 +28,9 @@ export default function CompleteRegistration({ searchParams }: { searchParams: M
       auth_id: auth_data.session?.user.id
     })
 
-    if (error) {
-      console.error(error.code + " " + error.message);
+    if (error || auth_error) {
+      console.error(error?.code + " " + error?.message);
+      console.error(auth_error?.code + " " + auth_error?.message);
       return encodedRedirect("error", "/signup", "Error trying to sign up");
     } else {
       return encodedRedirect(
