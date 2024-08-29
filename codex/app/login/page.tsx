@@ -59,7 +59,7 @@ export default function Login({ searchParams }: Readonly<{ searchParams: Message
         </p>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
           <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@example.com" required />
+          <Input name="email" placeholder="seuemail@example.com" required />
           <div className="flex justify-between items-center">
             <Label htmlFor="password">Senha</Label>
 

@@ -82,7 +82,7 @@ export default function ForgotPassword({
         </p>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
           <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@example.com" required />
+          <Input name="email" placeholder="seuemail@example.com" required />
           <SubmitButton formAction={forgotPassword}>
             Reset Password
           </SubmitButton>
