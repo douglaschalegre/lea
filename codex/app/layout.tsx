@@ -13,9 +13,9 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
