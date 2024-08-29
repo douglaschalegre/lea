@@ -1,41 +1,41 @@
-import NextLogo from "./NextLogo";
-import SupabaseLogo from "./SupabaseLogo";
+import RhfLogo from "./RhfLogo";
+import SuperEstagiosLogo from "./SuperEstagiosLogo";
 
 export default function Header() {
   return (
     <div className="flex flex-col gap-16 items-center">
       <div className="flex gap-8 justify-center items-center">
         <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+          href="https://www.instagram.com/superestagios.al.maceio/"
           target="_blank"
           rel="noreferrer"
         >
-          <SupabaseLogo />
+          <SuperEstagiosLogo />
         </a>
         <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
+        <a href="https://www.instagram.com/rhftalentos_maceio_jatiuca/" target="_blank" rel="noreferrer">
+          <RhfLogo />
         </a>
       </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
+      <h1 className="sr-only">Plataforma Super Estágios e RHF, Maceió, AL.</h1>
       <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
+        Recrutamento e seleção, treinamento, consultoria, RH e gestão é com{" "}
         <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+          href="https://www.instagram.com/superestagios.al.maceio/"
           target="_blank"
           className="font-bold hover:underline"
           rel="noreferrer"
         >
-          Supabase
+          Super Estágios
         </a>{" "}
-        and{" "}
+        e{" "}
         <a
-          href="https://nextjs.org/"
+          href="https://www.instagram.com/rhftalentos_maceio_jatiuca/"
           target="_blank"
           className="font-bold hover:underline"
           rel="noreferrer"
         >
-          Next.js
+          RHF Talentos
         </a>
       </p>
       <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />

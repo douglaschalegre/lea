@@ -87,15 +87,15 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>{" "}
-        Back
+        Voltar
       </Link>
 
       <form className="flex flex-col w-full justify-center gap-2 text-foreground [&>input]:mb-6 max-w-md">
-        <h1 className="text-2xl font-medium">Sign up</h1>
+        <h1 className="text-2xl font-medium">Registre-se</h1>
         <p className="text-sm text text-foreground/60">
-          Already have an account?{" "}
+          Já possui uma conta?{" "}
           <Link className="text-blue-600 font-medium underline" href="/login">
-            Log in
+            Entrar
           </Link>
         </p>
         <div className="mt-8 flex flex-col gap-2 [&>input]:mb-3">
@@ -109,9 +109,9 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
             required
           />
           <Label htmlFor="last_name">Sobrenome</Label>
-          <Input name="last_name" placeholder="Silva" required />
+          <Input name="last_name" placeholder="Silva Nascimento" required />
           <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@exemplo.com" required />
+          <Input name="email" placeholder="seuemail@exemplo.com" required />
           <Label htmlFor="password">Senha</Label>
           <Input
             type="password"

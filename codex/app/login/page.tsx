@@ -7,7 +7,7 @@ import { Input } from "@/components/forms/input";
 import { FormMessage, Message } from "@/components/forms/form-message";
 import { encodedRedirect } from "@/utils/utils";
 
-export default function Login({ searchParams }: { searchParams: Message }) {
+export default function Login({ searchParams }: Readonly<{ searchParams: Message }>) {
   const signIn = async (formData: FormData) => {
     "use server";
 
@@ -21,9 +21,8 @@ export default function Login({ searchParams }: { searchParams: Message }) {
     });
 
     if (error) {
-      return encodedRedirect("error", "/login", "Could not authenticate user");
+      return encodedRedirect("error", "/login", "Não foi possível autenticar o usuário");
     }
-
     return redirect("/protected");
   };
 
@@ -47,28 +46,28 @@ export default function Login({ searchParams }: { searchParams: Message }) {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>{" "}
-        Back
+        Voltar
       </Link>
 
       <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground [&>input]:mb-6 max-w-md p-4">
-        <h1 className="text-2xl font-medium">Log in</h1>
+        <h1 className="text-2xl font-medium">Entrar</h1>
         <p className="text-sm text-foreground/60">
-          Don't have an account?{" "}
+          Ainda não possui uma conta?{" "}
           <Link className="text-blue-600 font-medium underline" href="/signup">
-            Sign up
+            Registre-se
           </Link>
         </p>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
           <Label htmlFor="email">Email</Label>
           <Input name="email" placeholder="you@example.com" required />
           <div className="flex justify-between items-center">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">Senha</Label>
 
             <Link
               className="text-sm text-blue-600 underline"
               href="/forgot-password"
             >
-              Forgot Password?
+              Esqueceu a sua senha?
             </Link>
           </div>
           <Input
@@ -77,8 +76,8 @@ export default function Login({ searchParams }: { searchParams: Message }) {
             placeholder="••••••••"
             required
           />
-          <SubmitButton formAction={signIn} pendingText="Signing In...">
-            Log in
+          <SubmitButton formAction={signIn} pendingText="Entrando...">
+            Entrar
           </SubmitButton>
           <FormMessage message={searchParams} />
         </div>
