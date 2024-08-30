@@ -21,7 +21,7 @@ export default async function ResetPassword({
       encodedRedirect(
         "error",
         "/protected/reset-password",
-        "Password and confirm password are required",
+        "Senha e confirme sua senha são obrigatórios",
       );
     }
 
@@ -29,7 +29,7 @@ export default async function ResetPassword({
       encodedRedirect(
         "error",
         "/protected/reset-password",
-        "Passwords do not match",
+        "As senhas não são idênticas",
       );
     }
 
@@ -41,36 +41,36 @@ export default async function ResetPassword({
       encodedRedirect(
         "error",
         "/protected/reset-password",
-        "Password update failed",
+        "Ocorreu um erro ao atualizar a senha",
       );
     }
 
-    encodedRedirect("success", "/protected/reset-password", "Password updated");
+    encodedRedirect("success", "/protected/reset-password", "Senha atualizada com sucesso");
   };
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center w-full">
       <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4">
-        <h1 className="text-2xl font-medium">Reset password</h1>
+        <h1 className="text-2xl font-medium">Crie sua nova senha</h1>
         <p className="text-sm text-foreground/60">
-          Please enter your new password below.
+          Por favor insira sua nova senha abaixo.
         </p>
 
-        <Label htmlFor="password">New password</Label>
+        <Label htmlFor="password">Nova senha</Label>
         <Input
           type="password"
           name="password"
-          placeholder="New password"
+          placeholder="Nova senha"
           required
         />
-        <Label htmlFor="confirmPassword">Confirm password</Label>
+        <Label htmlFor="confirmPassword">Confirme a senha</Label>
         <Input
           type="password"
           name="confirmPassword"
-          placeholder="Confirm password"
+          placeholder="Confirme a senha"
           required
         />
-        <SubmitButton formAction={resetPassword}>Reset password</SubmitButton>
+        <SubmitButton formAction={resetPassword}>Salvar nova senha</SubmitButton>
         <FormMessage message={searchParams} />
       </form>
     </div>
