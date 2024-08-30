@@ -31,7 +31,7 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
         emailRedirectTo: `${origin}/auth/callback`,
       },
     });
-
+    
     const { error: accounts_error } = await supabase.from('accounts').insert({
       cpf: cpf,
       first_name: first_name,
@@ -39,11 +39,6 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
       created_at: t,
       auth_id: auth_data.session?.user.id
     })
-    if (!email || !password) {
-      return { error: "Email and password are required" };
-    }
-
-    
 
     if (accounts_error || signup_error || auth_error) {
       console.error("Accounts insert error:" + accounts_error?.code + " " + accounts_error?.message);
