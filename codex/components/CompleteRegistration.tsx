@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { SubmitButton } from '@/components/forms/submit-button';
-import { Input } from '@/components/forms/input';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/forms/label';
 import { FormMessage, Message } from '@/components/forms/form-message';
 import { encodedRedirect } from '@/utils/utils';
@@ -135,89 +135,136 @@ export default function CompleteRegistration({
             <p className="text text-sm text-foreground/60">
               Precisamos dessas informações sobre você!
             </p>
-            <div className="mt-8 flex flex-col gap-2 [&>input]:mb-3">
-              <Label htmlFor="birthdate">Data de nascimento *</Label>
-              <Input name="birthdate" required type="date" />
-              <Label htmlFor="mom_name">Nome completo da mãe</Label>
-              <Input type="text" name="mom_name" placeholder="Dona Maria" />
-              <Label htmlFor="dad_name">Nome completo do pai</Label>
-              <Input name="dad_name" placeholder="Seu João" />
-              <Label htmlFor="genre">Gênero *</Label>
-              <Select name="genre" required>
-                <SelectTrigger>
-                  <SelectValue placeholder="Gênero" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Gênero</SelectLabel>
-                    <SelectItem value="Masculino">Masculino</SelectItem>
-                    <SelectItem value="Feminino">Feminino</SelectItem>
-                    <SelectItem value="Outro">Outro</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Label htmlFor="civil_state">Estado civil *</Label>
-              <Select name="civil_state" required>
-                <SelectTrigger>
-                  <SelectValue placeholder="Estado civil" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Estado civil</SelectLabel>
-                    <SelectItem value="Solteiro">Solteiro</SelectItem>
-                    <SelectItem value="Casado">Casado</SelectItem>
-                    <SelectItem value="Divorciado">Divorciado</SelectItem>
-                    <SelectItem value="Viúvo">Viúvo</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Label htmlFor="birthplace">Local de nascimento *</Label>
-              <Input name="birthplace" required />
-              <Label htmlFor="cep">CEP *</Label>
-              <Input name="cep" required />
-              <Label htmlFor="address">Endereço *</Label>
-              <Input name="address" required />
-              <Label htmlFor="address_number">Número do endereço *</Label>
-              <Input name="address_number" required />
-              <Label htmlFor="address_complement">
-                Complemento do endereço
-              </Label>
-              <Input name="address_complement" />
-              <Label htmlFor="address_neighborhood">Bairro *</Label>
-              <Input name="address_neighborhood" required />
-              <Label htmlFor="state">Estado *</Label>
-              <Input name="state" required />
-              <Label htmlFor="city">Cidade *</Label>
-              <Input name="city" required />
-              <Label htmlFor="state_of_birth">Estado de nascimento *</Label>
-              <Input name="state_of_birth" required />
-              <Label htmlFor="city_of_birth">Cidade de nascimento *</Label>
-              <Input name="city_of_birth" required />
-              <Label htmlFor="phone_1">Número para contato 1 *</Label>
-              <Input name="phone_1" required />
-              <Label htmlFor="phone_2">Número para contato 2</Label>
-              <Input name="phone_2" />
-              <Label htmlFor="phone_3">Número para contato 3</Label>
-              <Input name="phone_3" />
-              <Label htmlFor="identity_document">
-                Documento de identidade *
-              </Label>
-              <Input name="identity_document" required />
-              <Label htmlFor="document_issuer">Orgão emissor *</Label>
-              <Input name="document_issuer" required />
-              <Label htmlFor="instagram_username">Usuário do instagram</Label>
-              <Input name="instagram_username" placeholder="@nome_de_usuário" />
-              <Label htmlFor="facebook_url">Link do facebook</Label>
-              <Input
-                name="facebook_url"
-                placeholder="https://www.facebook.com/SuperEstagios"
-              />
-              <SubmitButton
-                formAction={completeRegistration}
-                pendingText="Enviando cadastro..."
-              >
-                Enviar
-              </SubmitButton>
+            <div className="mt-8 grid grid-cols-6 gap-2 [&>input]:mb-3">
+              <div className="col-span-3 flex flex-col">
+                <Label htmlFor="genre">Gênero *</Label>
+                <Select name="genre" required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Gênero" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Gênero</SelectLabel>
+                      <SelectItem value="Masculino">Masculino</SelectItem>
+                      <SelectItem value="Feminino">Feminino</SelectItem>
+                      <SelectItem value="Outro">Outro</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="col-span-3 flex flex-col">
+                <Label htmlFor="civil_state">Estado civil *</Label>
+                <Select name="civil_state" required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Estado civil" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Estado civil</SelectLabel>
+                      <SelectItem value="Solteiro">Solteiro</SelectItem>
+                      <SelectItem value="Casado">Casado</SelectItem>
+                      <SelectItem value="Divorciado">Divorciado</SelectItem>
+                      <SelectItem value="Viúvo">Viúvo</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="col-span-4 flex flex-col">
+                <Label htmlFor="identity_document">
+                  Documento de identidade *
+                </Label>
+                <Input name="identity_document" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="document_issuer">Orgão emissor *</Label>
+                <Input name="document_issuer" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="cep">CEP *</Label>
+                <Input name="cep" required />
+              </div>
+              <div className="col-span-4 flex flex-col">
+                <Label htmlFor="address">Endereço *</Label>
+                <Input name="address" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="address_number">Número *</Label>
+                <Input name="address_number" required />
+              </div>
+              <div className="col-span-4 flex flex-col">
+                <Label htmlFor="address_complement">Complemento</Label>
+                <Input name="address_complement" />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="address_neighborhood">Bairro *</Label>
+                <Input name="address_neighborhood" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="state">Estado *</Label>
+                <Input name="state" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="city">Cidade *</Label>
+                <Input name="city" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="birthplace">Local de nascimento *</Label>
+                <Input name="birthplace" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="state_of_birth">Estado de nascimento *</Label>
+                <Input name="state_of_birth" required />
+              </div>
+              <div className="col-span-2 flex flex-col">
+                <Label htmlFor="city_of_birth">Cidade de nascimento *</Label>
+                <Input name="city_of_birth" required />
+              </div>
+              <div className="col-span-3 flex flex-col">
+                <Label htmlFor="birthdate">Data de nascimento *</Label>
+                <Input name="birthdate" required type="date" />
+              </div>
+              <div className="col-span-3 flex flex-col">
+                <Label htmlFor="phone_1">Número para contato 1 *</Label>
+                <Input name="phone_1" required />
+              </div>
+              <div className="col-span-3 flex flex-col">
+                <Label htmlFor="phone_2">Número para contato 2</Label>
+                <Input name="phone_2" />
+              </div>
+              <div className="col-span-3 flex flex-col">
+                <Label htmlFor="phone_3">Número para contato 3</Label>
+                <Input name="phone_3" />
+              </div>
+              <div className="col-span-6 flex flex-col">
+                <Label htmlFor="mom_name">Nome completo da mãe</Label>
+                <Input type="text" name="mom_name" placeholder="Dona Maria" />
+              </div>
+              <div className="col-span-6 flex flex-col">
+                <Label htmlFor="dad_name">Nome completo do pai</Label>
+                <Input name="dad_name" placeholder="Seu João" />
+              </div>
+              <div className="col-span-6 flex flex-col">
+                <Label htmlFor="instagram_username">Usuário do instagram</Label>
+                <Input
+                  name="instagram_username"
+                  placeholder="@nome_de_usuário"
+                />
+              </div>
+              <div className="col-span-6 flex flex-col">
+                <Label htmlFor="facebook_url">Link do facebook</Label>
+                <Input
+                  name="facebook_url"
+                  placeholder="https://www.facebook.com/SuperEstagios"
+                />
+              </div>
+              <div className="col-span-6 flex flex-col">
+                <SubmitButton
+                  formAction={completeRegistration}
+                  pendingText="Enviando cadastro..."
+                >
+                  Enviar
+                </SubmitButton>
+              </div>
             </div>
             <FormMessage message={searchParams} />
           </form>

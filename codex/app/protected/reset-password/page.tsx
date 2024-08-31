@@ -1,9 +1,9 @@
-import { FormMessage, Message } from "@/components/forms/form-message";
-import { Input } from "@/components/forms/input";
-import { Label } from "@/components/forms/label";
-import { SubmitButton } from "@/components/forms/submit-button";
-import { createClient } from "@/utils/supabase/server";
-import { encodedRedirect } from "@/utils/utils";
+import { FormMessage, Message } from '@/components/forms/form-message';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/forms/label';
+import { SubmitButton } from '@/components/forms/submit-button';
+import { createClient } from '@/utils/supabase/server';
+import { encodedRedirect } from '@/utils/utils';
 
 export default async function ResetPassword({
   searchParams,
@@ -11,25 +11,25 @@ export default async function ResetPassword({
   searchParams: Message;
 }) {
   const resetPassword = async (formData: FormData) => {
-    "use server";
+    'use server';
     const supabase = createClient();
 
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword") as string;
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
 
     if (!password || !confirmPassword) {
       encodedRedirect(
-        "error",
-        "/protected/reset-password",
-        "Senha e confirme sua senha são obrigatórios",
+        'error',
+        '/protected/reset-password',
+        'Senha e confirme sua senha são obrigatórios',
       );
     }
 
     if (password !== confirmPassword) {
       encodedRedirect(
-        "error",
-        "/protected/reset-password",
-        "As senhas não são idênticas",
+        'error',
+        '/protected/reset-password',
+        'As senhas não são idênticas',
       );
     }
 
@@ -39,18 +39,22 @@ export default async function ResetPassword({
 
     if (error) {
       encodedRedirect(
-        "error",
-        "/protected/reset-password",
-        "Ocorreu um erro ao atualizar a senha",
+        'error',
+        '/protected/reset-password',
+        'Ocorreu um erro ao atualizar a senha',
       );
     }
 
-    encodedRedirect("success", "/protected/reset-password", "Senha atualizada com sucesso");
+    encodedRedirect(
+      'success',
+      '/protected/reset-password',
+      'Senha atualizada com sucesso',
+    );
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center w-full">
-      <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4">
+    <div className="flex w-full flex-1 flex-col items-center justify-center">
+      <form className="flex w-full max-w-md flex-col gap-2 p-4 [&>input]:mb-4">
         <h1 className="text-2xl font-medium">Crie sua nova senha</h1>
         <p className="text-sm text-foreground/60">
           Por favor insira sua nova senha abaixo.
@@ -70,7 +74,9 @@ export default async function ResetPassword({
           placeholder="Confirme a senha"
           required
         />
-        <SubmitButton formAction={resetPassword}>Salvar nova senha</SubmitButton>
+        <SubmitButton formAction={resetPassword}>
+          Salvar nova senha
+        </SubmitButton>
         <FormMessage message={searchParams} />
       </form>
     </div>
