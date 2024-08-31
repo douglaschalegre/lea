@@ -20,7 +20,7 @@ export default async function ResetPassword({
     if (!password || !confirmPassword) {
       encodedRedirect(
         'error',
-        '/protected/reset-password',
+        '/dashboard/reset-password',
         'Senha e confirme sua senha são obrigatórios',
       );
     }
@@ -28,7 +28,7 @@ export default async function ResetPassword({
     if (password !== confirmPassword) {
       encodedRedirect(
         'error',
-        '/protected/reset-password',
+        '/dashboard/reset-password',
         'As senhas não são idênticas',
       );
     }
@@ -40,14 +40,14 @@ export default async function ResetPassword({
     if (error) {
       encodedRedirect(
         'error',
-        '/protected/reset-password',
+        '/dashboard/reset-password',
         'Ocorreu um erro ao atualizar a senha',
       );
     }
 
     encodedRedirect(
       'success',
-      '/protected/reset-password',
+      '/dashboard/reset-password',
       'Senha atualizada com sucesso',
     );
   };

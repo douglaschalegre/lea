@@ -29,7 +29,7 @@ export default function Login({
         'Não foi possível autenticar o usuário',
       );
     }
-    return redirect('/protected');
+    return redirect('/dashboard');
   };
 
   return (

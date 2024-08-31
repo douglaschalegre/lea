@@ -104,14 +104,14 @@ export default function CompleteRegistration({
       );
       return encodedRedirect(
         'error',
-        '/protected',
+        '/dashboard',
         'Erro tentando concluir cadastro.',
       );
     }
 
     return encodedRedirect(
       'success',
-      '/protected',
+      '/dashboard',
       'Obrigado por concluir o seu cadastro! Fique a vontade para se inscrever em vagas.',
     );
   };
