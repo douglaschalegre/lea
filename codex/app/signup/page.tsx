@@ -7,6 +7,7 @@ import { Label } from '@/components/forms/label';
 import { FormMessage, Message } from '@/components/forms/form-message';
 import { encodedRedirect } from '@/utils/utils';
 import { Checkbox } from '@/components/ui/checkbox';
+import handleRequestError from '@/utils/requestError';
 
 export default function Signup({
   searchParams,
@@ -21,50 +22,63 @@ export default function Signup({
     const first_name = formData.get('first_name')?.toString();
     const last_name = formData.get('last_name')?.toString();
     const t = new Date(Date.now()).toISOString();
-    const { data: auth_data, error: auth_error } =
-      await supabase.auth.getSession();
 
     if (!cpf || !first_name || !last_name || !email || !password) {
       return { error: 'Campo(s) obrigatório(s) não preenchido(s)' };
     }
+    const { data: auth_data, error: auth_error } =
+      await supabase.auth.getSession();
 
-    const { error: signup_error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
-    });
+    if (auth_data) {
+      return encodedRedirect('success', '/dashboard', 'Você já está logado!');
+    } else if (auth_error) {
+      return handleRequestError(
+        'error',
+        '/signup',
+        'Erro ao carregar sessão',
+        auth_error,
+      );
+    }
+
+    const { data: signup_data, error: signup_error } =
+      await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${origin}/auth/callback`,
+        },
+      });
+    if (signup_error) {
+      return handleRequestError(
+        'error',
+        '/signup',
+        'Erro ao criar o SignUp ',
+        signup_error,
+      );
+    }
 
     const { error: accounts_error } = await supabase.from('accounts').insert({
       cpf: cpf,
       first_name: first_name,
       last_name: last_name,
       created_at: t,
-      auth_id: auth_data.session?.user.id,
+      auth_id: signup_data.session?.user.id,
     });
 
-    if (accounts_error || signup_error || auth_error) {
-      console.error(
-        'Accounts insert error:' +
-          accounts_error?.code +
-          ' ' +
-          accounts_error?.message,
-      );
-      console.error(
-        'Signup error:' + signup_error?.code + ' ' + signup_error?.message,
-      );
-      console.error(
-        'Auth error:' + auth_error?.code + ' ' + auth_error?.message,
-      );
-      return encodedRedirect('error', '/signup', 'Error trying to sign up');
-    } else {
-      return encodedRedirect(
-        'success',
+    if (accounts_error) {
+      return handleRequestError(
+        'error',
         '/signup',
-        'Thanks for signing up! Please check your email for a verification link.',
+        'Erro tentando criar "accounts"',
+        accounts_error,
       );
     }
+
+    return encodedRedirect(
+      'success',
+      '/signup',
+      'Obrigado por fazer o cadastro! Pode prosseguir efetuando o login.',
+    );
   };
 
   if ('message' in searchParams) {
