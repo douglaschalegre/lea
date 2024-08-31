@@ -6,8 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/forms/label';
 import { FormMessage, Message } from '@/components/forms/form-message';
 import { encodedRedirect } from '@/utils/utils';
+import { Checkbox } from '@/components/ui/checkbox';
 
-export default function Signup({ searchParams }: { searchParams: Message }) {
+export default function Signup({
+  searchParams,
+}: Readonly<{ searchParams: Message }>) {
   const signUp = async (formData: FormData) => {
     'use server';
     const supabase = createClient();
@@ -119,6 +122,21 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
             placeholder="••••••••"
             required
           />
+          <div className="items-top mb-6 flex space-x-2">
+            <Checkbox id="terms1" required />
+            <div className="grid gap-1.5 leading-none">
+              <label
+                htmlFor="terms1"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Aceitar termos e condições do cadastro.
+              </label>
+              <p className="text-sm text-muted-foreground">
+                Ao aceitar você declara que está ciente que esses dados serão
+                compartilhados entre as empresas Super Estágios e RHF Talentos.
+              </p>
+            </div>
+          </div>
           <SubmitButton formAction={signUp} pendingText="Enviando cadastro...">
             Enviar
           </SubmitButton>
