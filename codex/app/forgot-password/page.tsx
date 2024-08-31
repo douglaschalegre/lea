@@ -10,9 +10,9 @@ import { encodedRedirect } from '@/utils/utils';
 
 export default function ForgotPassword({
   searchParams,
-}: {
+}: Readonly<{
   searchParams: Message;
-}) {
+}>) {
   const forgotPassword = async (formData: FormData) => {
     'use server';
 
