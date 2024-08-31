@@ -147,7 +147,8 @@ export default function Signup({
               </label>
               <p className="text-sm text-muted-foreground">
                 Ao aceitar você declara que está ciente que esses dados serão
-                compartilhados entre as empresas Super Estágios e RHF Talentos.
+                compartilhados entre as empresas Super Estágios, RHF Talentos e
+                QCarreira.
               </p>
             </div>
           </div>
