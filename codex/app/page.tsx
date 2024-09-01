@@ -11,7 +11,7 @@ export default async function Index() {
           <h2 className="mb-4 text-center text-2xl font-bold">
             Inscreva-se agora e comece a ver vagas disponíveis!
           </h2>
-          <Link href="/login">
+          <Link href="/signup">
             <Button>Registre-se</Button>
           </Link>
         </main>
