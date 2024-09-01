@@ -1,5 +1,4 @@
 import { createClient } from '@/utils/supabase/server';
-import { headers } from 'next/headers';
 import Link from 'next/link';
 import { SubmitButton } from '../../components/forms/submit-button';
 import { Input } from '@/components/ui/input';
@@ -17,7 +16,6 @@ export default function Signup({
     const supabase = createClient();
     const email = formData.get('email')?.toString();
     const password = formData.get('password')?.toString();
-    const origin = headers().get('origin');
     const cpf = formData.get('cpf')?.toString();
     const first_name = formData.get('first_name')?.toString();
     const last_name = formData.get('last_name')?.toString();
@@ -29,7 +27,7 @@ export default function Signup({
     const { data: auth_data, error: auth_error } =
       await supabase.auth.getSession();
 
-    if (auth_data) {
+    if (!(auth_data.session === null)) {
       return encodedRedirect('success', '/dashboard', 'Você já está logado!');
     } else if (auth_error) {
       return handleRequestError(
@@ -44,17 +42,17 @@ export default function Signup({
       await supabase.auth.signUp({
         email,
         password,
-        options: {
-          emailRedirectTo: `${origin}/auth/callback`,
-        },
       });
     if (signup_error) {
-      return handleRequestError(
-        'error',
-        '/signup',
-        'Erro ao criar o SignUp ',
-        signup_error,
-      );
+      let msg =
+        'Erro ao criar sua conta, entre em contato com um administrador';
+      if (signup_error.message.includes('weak_password')) {
+        msg = 'A senha deve possuir no mínimo 6 caracteres.';
+      }
+      if (signup_error.message.includes('email address: invalid format')) {
+        msg = 'Endereço de email inválido.';
+      }
+      return handleRequestError('error', '/signup', msg, signup_error);
     }
 
     const { error: accounts_error } = await supabase.from('accounts').insert({
@@ -134,6 +132,7 @@ export default function Signup({
             type="password"
             name="password"
             placeholder="••••••••"
+            minLength={6}
             required
           />
           <div className="items-top mb-6 flex space-x-2">
