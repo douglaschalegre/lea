@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
+import handleRequestError from '@/utils/requestError';
 
 export default function CompleteRegistration({
   searchParams,
@@ -106,6 +107,22 @@ export default function CompleteRegistration({
         'error',
         '/dashboard',
         'Erro tentando concluir cadastro.',
+      );
+    }
+
+    const { error: accounts_error } = await supabase
+      .from('accounts')
+      .update({
+        filled_registration: true,
+      })
+      .eq('id', accountId);
+
+    if (accounts_error) {
+      return handleRequestError(
+        'error',
+        '/dashboard',
+        'Ocorreu um erro ao atualizar o estado do seu cadastro.',
+        accounts_error,
       );
     }
 
