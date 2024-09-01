@@ -74,8 +74,8 @@ export default function Signup({
 
     return encodedRedirect(
       'success',
-      '/signup',
-      'Obrigado por fazer o cadastro! Pode prosseguir efetuando o login.',
+      '/dashboard',
+      'Obrigado por fazer o cadastro! Agora você já está logado. Redirecionando para dashboard...',
     );
   };
 
